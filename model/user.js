@@ -52,11 +52,7 @@ userSchema.pre("save", function (next) {
     next();
 });
 
-<<<<<<< HEAD
 userSchema.static("matchPasswordAndGenerateToken", async function(email,password){
-=======
-userSchema.static("matchPassword", async function(email,password){
->>>>>>> 68561d0066d974ec3db7cee8475ce28c4c2cabf0
     const user = await this.findOne({email});
 
     if(!user) throw new Error('User not found!');
@@ -67,14 +63,9 @@ userSchema.static("matchPassword", async function(email,password){
     const userProvidedHash = createHmac("sha256", salt).update(password).digest("hex");
 
     if(hashedPassword !== userProvidedHash) throw new Error('Incorrect Password')
-<<<<<<< HEAD
         
         const token = createTokenForUser(user);
     return token;
-=======
-
-    return user;
->>>>>>> 68561d0066d974ec3db7cee8475ce28c4c2cabf0
 })
 
 const User = model('user', userSchema);
