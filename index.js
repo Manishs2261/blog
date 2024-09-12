@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const express = require('express');
 const path = require("path");
 const mongoose = require("mongoose");
@@ -5,9 +7,12 @@ const clookiesPaser = require('cookie-parser');
 const {Blog} = require('./model/blogSchema');
 
 const app = express();
-const PORT = 8000;
+const PORT =  process.env.PORT || 8000;
 
-mongoose.connect('mongodb://127.0.0.1:27017/blogify').then((e)=> console.log("Mongo Db connected"));
+//mongodb://127.0.0.1:27017/blogify
+mongoose.connect(process.env.MONGO_URL).then((e)=> console.log("Mongo Db connected"));
+
+
 
 const userRoute = require('./router/user');
 const blogRoute = require('./router/blog');
